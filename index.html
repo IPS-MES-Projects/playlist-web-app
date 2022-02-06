@@ -45,6 +45,7 @@
           >
             <div
               class="card my-4"
+              draggable="true"
               aria-label="Playlist"
               aria-description="Clique duas vezes para abrir a playlist"
             >
@@ -64,7 +65,10 @@
               </div>
             </div>
 
-            <div class="card my-4">
+            <div
+              class="card my-4"
+              draggable="true"
+            >
               <div class="row g-0 align-items-center">
                 <div class="col-md-3 p-1">
                   <img
@@ -90,7 +94,7 @@
           <!-- Details top row -->
           <div class="row">
             <!-- Vinyl player -->
-            <div class="col-lg-4 p-2 text-center">
+            <div class="col-lg-4 p-2 text-center" id="drop">
               <img
                 id="vinyl-player"
                 src="images/vinyl-player-stop.jpeg"
@@ -111,14 +115,14 @@
                     class="h4 m-0"
                     aria-label="Título da playlist ativa"
                   >
-                    Playlist 1
+                    Escolha Playlist
                   </p>
 
                   <!-- Playlist actions container -->
-                  <div class="mt-2 mt-sm-0">
+                  <div class="mt-2 mt-sm-0" id="playlist-buttons">
                     <button
                       id="edit-playlist-button"
-                      class="btn btn-info btn-sm me-2"
+                      class="btn btn-info btn-sm me-2 d-none"
                       type="button"
                       aria-label="Editar a playlist"
                     >
@@ -127,7 +131,7 @@
 
                     <button
                       id="delete-playlist-button"
-                      class="btn btn-danger btn-sm"
+                      class="btn btn-danger btn-sm d-none"
                       type="button"
                       aria-label="Apagar a playlist"
                     >
@@ -143,9 +147,7 @@
                     class="card-text"
                     aria-label="Descrição da playlist ativa"
                   >
-                    hiwebvi wrvbrwipv brwli vbojew hvoewjvpi qejpv
-                    qnebvjqebvouqe nvopjeqn jlv neqjov nqeiljbvipqej vpqenv
-                    ojeqnbou eqnvpi qeuv beqvmn,eqn ijpv qebhilb veqiouveefws
+                    Selecione uma playlist da lista à esquerda e arrate-a para o gira discos.
                   </p>
                 </div>
               </div>
@@ -155,7 +157,7 @@
           <!-- !Details top row -->
 
           <!-- Details bottom row -->
-          <div id="songs-container" class="row p-4">
+          <div id="songs-container" class="row p-4 d-none">
             <div class="col-12">
               <!-- Songs header -->
               <div class="card my-4">
@@ -217,6 +219,7 @@
     <script src="vendors/fontawesome-free-5.15.4-web/js/all.min.js"></script>
     <script src="vendors/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
     <script src="scripts/main.js"></script>
+    <script src="scripts/drag-and-drop.js"></script>
     <!-- !Scripts -->
   </body>
 </html>
