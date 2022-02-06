@@ -42,12 +42,13 @@
             id="playlists-container"
             class="overflow-auto"
             aria-label="As minhas playlists"
+            aria-description="Clique duas vezes para abrir a playlist"
           >
             <div
               class="card my-4"
+              id="Playlist 1"
               draggable="true"
               aria-label="Playlist"
-              aria-description="Clique duas vezes para abrir a playlist"
             >
               <div class="row g-0 align-items-center">
                 <div class="col-md-3 p-1">
@@ -67,7 +68,9 @@
 
             <div
               class="card my-4"
+              id="Playlist 2"
               draggable="true"
+              aria-label="Playlist"
             >
               <div class="row g-0 align-items-center">
                 <div class="col-md-3 p-1">
@@ -119,10 +122,10 @@
                   </p>
 
                   <!-- Playlist actions container -->
-                  <div class="mt-2 mt-sm-0" id="playlist-buttons">
+                  <div class="mt-2 mt-sm-0 d-none" id="playlist-buttons">
                     <button
                       id="edit-playlist-button"
-                      class="btn btn-info btn-sm me-2 d-none"
+                      class="btn btn-info btn-sm me-2"
                       type="button"
                       aria-label="Editar a playlist"
                     >
@@ -131,7 +134,7 @@
 
                     <button
                       id="delete-playlist-button"
-                      class="btn btn-danger btn-sm d-none"
+                      class="btn btn-danger btn-sm"
                       type="button"
                       aria-label="Apagar a playlist"
                     >
