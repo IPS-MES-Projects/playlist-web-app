@@ -49,13 +49,13 @@ function drop(event) {
 }
 
 
-// todo function to load music list still needs localStorage
+// // todo function to load music list still needs localStorage
 // function loadMusicList(songsListElement){
 //     let musicList = localStorage.getItem("musicList");
 
-//     musicList.forEach(songsListElement =>{
+//     musicList.forEach(music =>{
 //         let displayListItem = document.createElement('li');
-//         displayListItem.textContent = musicList;
+//         displayListItem.textContent = music;
 //         songsListElement.append(displayListItem);
 //     });
 // }
