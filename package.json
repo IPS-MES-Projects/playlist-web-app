@@ -1,0 +1,31 @@
+{
+  "name": "playlist-web-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "serve": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IPS-MES-Projects/playlist-web-app.git"
+  },
+  "contributors": [
+    {
+      "name": "Diogo Costa",
+      "url": "https://github.com/skpdu"
+    },
+    {
+      "name": "Edgar Santos",
+      "url": "https://github.com/edgarbs1998"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IPS-MES-Projects/playlist-web-app/issues"
+  },
+  "homepage": "https://ips-mes-projects.github.io/playlist-web-app/",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}

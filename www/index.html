@@ -42,52 +42,8 @@
             id="playlists-container"
             class="overflow-auto"
             aria-label="As minhas playlists"
-            aria-description="Clique duas vezes para abrir a playlist"
-          >
-            <div
-              class="card my-4"
-              id="Playlist 1"
-              draggable="true"
-              aria-label="Playlist"
-            >
-              <div class="row g-0 align-items-center">
-                <div class="col-md-3 p-1">
-                  <img
-                    src="images/vinyl/vinyl-white.png"
-                    class="img-fluid"
-                    alt="Disco de vinil"
-                  />
-                </div>
-                <div class="col-md-9">
-                  <div class="card-body">
-                    <p class="card-text">Playlist 1</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="card my-4"
-              id="Playlist 2"
-              draggable="true"
-              aria-label="Playlist"
-            >
-              <div class="row g-0 align-items-center">
-                <div class="col-md-3 p-1">
-                  <img
-                    src="images/vinyl/vinyl-red.png"
-                    class="img-fluid"
-                    alt="Disco de vinil"
-                  />
-                </div>
-                <div class="col-md-9">
-                  <div class="card-body">
-                    <p class="card-text">Playlist 2</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            aria-description="Clique duas vezes numa playlist para abrir a mesma"
+          ></div>
           <!-- !Playlists container -->
         </div>
         <!-- !Left column (playlists) -->
@@ -97,12 +53,13 @@
           <!-- Details top row -->
           <div class="row">
             <!-- Vinyl player -->
-            <div class="col-lg-4 p-2 text-center" id="drop">
+            <div class="col-lg-4 p-2 text-center" id="vinyl-player">
               <img
-                id="vinyl-player"
+                id="vinyl-player-image"
                 src="images/vinyl-player-stop.jpeg"
                 class="img-fluid rounded"
                 alt="Leitor de discos de vinil"
+                draggable="false"
               />
             </div>
             <!-- !Vinyl player -->
@@ -118,14 +75,17 @@
                     class="h4 m-0"
                     aria-label="Título da playlist ativa"
                   >
-                    Escolha Playlist
+                    Escolha uma Playlist
                   </p>
 
                   <!-- Playlist actions container -->
-                  <div class="mt-2 mt-sm-0 d-none" id="playlist-buttons">
+                  <div
+                    id="playlist-actions"
+                    class="gap-2 d-grid mt-2 d-md-flex mt-md-0 justify-content-md-end invisible"
+                  >
                     <button
                       id="edit-playlist-button"
-                      class="btn btn-info btn-sm me-2"
+                      class="btn btn-info btn-sm me-md-2"
                       type="button"
                       aria-label="Editar a playlist"
                     >
@@ -137,6 +97,8 @@
                       class="btn btn-danger btn-sm"
                       type="button"
                       aria-label="Apagar a playlist"
+                      data-bs-toggle="modal"
+                      data-bs-target="#delete-playlist-modal"
                     >
                       <i class="fa fa-trash-alt"></i> Apagar
                     </button>
@@ -150,7 +112,8 @@
                     class="card-text"
                     aria-label="Descrição da playlist ativa"
                   >
-                    Selecione uma playlist da lista à esquerda e arrate-a para o gira discos.
+                    Selecione uma playlist da lista à esquerda e arraste-a para
+                    o gira discos.
                   </p>
                 </div>
               </div>
@@ -170,7 +133,9 @@
                   <p class="h4 m-0">Músicas</p>
 
                   <!-- Songs actions container -->
-                  <div class="mt-2 mt-sm-0">
+                  <div
+                    class="gap-2 d-grid mt-2 d-md-flex mt-md-0 justify-content-md-end"
+                  >
                     <button
                       id="edit-songs-button"
                       class="btn btn-info btn-sm"
@@ -187,7 +152,8 @@
 
               <!-- Songs container -->
               <div
-                class="card"
+                id="songs-list-container"
+                class="card d-none"
                 style="background-color: rgba(255, 255, 255, 0.8)"
               >
                 <div class="card-body">
@@ -195,17 +161,7 @@
                     id="songs-list"
                     class="mb-0 overflow-auto"
                     aria-label="Lista das músicas da playlist ativa"
-                  >
-                    <li class="h5 my-3">
-                      Back it Up <span class="h6">(Naffar, Murdbrain)</span>
-                    </li>
-                    <li class="h5 my-3">
-                      Price <span class="h6">(Naffar, Jstn Dmnd)</span>
-                    </li>
-                    <li class="h5 my-3">
-                      Anthem <span class="h6">(Snavs, Fabian Mazur)</span>
-                    </li>
-                  </ol>
+                  ></ol>
                 </div>
               </div>
               <!-- !Songs container -->
@@ -216,13 +172,68 @@
         <!-- !Right column (details) -->
       </div>
     </main>
-    <!-- <1Page content -->
+    <!-- !Page content -->
 
-    <!-- Scripts -->
+    <!-- Delete Playlist Modal -->
+    <div
+      id="delete-playlist-modal"
+      class="modal fade"
+      tabindex="-1"
+      aria-labelledby="delete-playlist-modal-title"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="delete-playlist-modal-title" class="modal-title">
+              Apagar Playlist
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Fechar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Tem a certeza que pretende apagar a playlist selecionada?
+          </div>
+          <div class="modal-footer">
+            <button
+              id="delete-playlist-close-button"
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Fechar
+            </button>
+            <button
+              id="delete-playlist-confirm-button"
+              type="button"
+              class="btn btn-danger"
+            >
+              <i class="fa fa-trash-alt"></i> Apagar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- !Delete Playlist Modal -->
+
+    <!-- Vendor Scripts -->
     <script src="vendors/fontawesome-free-5.15.4-web/js/all.min.js"></script>
     <script src="vendors/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
-    <script src="scripts/main.js"></script>
+    <script src="vendors/mustache-4.1.0/mustache.min.js"></script>
+    <!-- !Vendor Scripts -->
+
+    <!-- Local Scripts -->
+    <script src="scripts/entities/song.js"></script>
+    <script src="scripts/entities/playlist.js"></script>
+    <script src="scripts/view-manager.js"></script>
+    <script src="scripts/storage.js"></script>
     <script src="scripts/drag-and-drop.js"></script>
-    <!-- !Scripts -->
+    <script src="scripts/web-messaging.js"></script>
+    <script src="scripts/main.js"></script>
+    <!-- !Local Scripts -->
   </body>
 </html>

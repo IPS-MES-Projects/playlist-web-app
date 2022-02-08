@@ -18,3 +18,7 @@ body {
 #songs-list {
   max-height: 40vh;
 }
+
+.draggable {
+  cursor: grab;
+}
