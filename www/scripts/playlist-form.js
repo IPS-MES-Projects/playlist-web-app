@@ -31,8 +31,8 @@ function editPlaylist(playlist) {
   document.getElementById("title").value = playlist.title;
   document.getElementById("description").value = playlist.description;
 
-  document.getElementById("header-title").innerHTML = "Editar Playlist";
-  document.getElementById("submit-button").innerHTML = "Editar";
+  document.getElementById("header-title").textContent = "Editar Playlist";
+  document.getElementById("submit-button").textContent = "Editar";
 }
 
 function closeWindow(event) {
