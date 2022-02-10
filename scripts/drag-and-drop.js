@@ -39,6 +39,7 @@ class DragAndDrop {
 
     playlistsNodes.forEach((node) => {
       node.addEventListener("dragstart", this.dragStart);
+      node.addEventListener("keyup", (event) => this.enterPress(event));
     });
   }
 
@@ -71,6 +72,23 @@ class DragAndDrop {
     // Retrieve playlist element id
     const playlistElementId = event.dataTransfer.getData("text");
 
+    // Set playlist
+    this.setPlaylist(playlistElementId);
+  }
+
+  enterPress(event) {
+    // Check if pressed the key is Return
+    if (event.keyCode !== 13) return;
+
+    // Set vinyl player as playing
+    const vinylPlayerImage = document.getElementById("vinyl-player-image");
+    vinylPlayerImage.src = "images/vinyl-player-start.gif";
+
+    // Set playlist
+    this.setPlaylist(event.target.id);
+  }
+
+  setPlaylist(playlistElementId) {
     // Set the selected playlist list id attribute
     this.selectedPlaylistId = playlistElementId.split("playlist_")[1];
 
