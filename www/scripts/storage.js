@@ -91,6 +91,11 @@ class Storage {
     // Updates the DOM of the playlists
     window.viewManager.updatePlaylistsView(this.playlists);
 
+    // Updates the DOM of the playlist details if the playlist is the selected one
+    if (window.dragAndDrop.SelectedPlaylistId === id) {
+      window.viewManager.showPlaylistDetails(playlist);
+    }
+
     // Update local storage
     localStorage.setItem("playlists", JSON.stringify(this.playlists));
   }
@@ -115,29 +120,27 @@ class Storage {
     localStorage.setItem("playlists", JSON.stringify(this.playlists));
   }
 
-  // /**
-  //  * Function that aims to add a Song feature to the specified playlist
-  //  */
-  // addPlaylistSong(playlistId, name, artists) {
-  //   // Checks if the playlist with the passed id exists
-  //   const playlist = this.playlists.find(
-  //     (playlist) => playlist.id === playlistId
-  //   );
-  //   if (!playlist) {
-  //     alert("A lista de reprodução selecionada não pôde ser encontrada!");
-  //   }
+  /**
+   * Function that aims to update Song features of the specified playlist
+   */
+  updatePlaylistSongs(playlistId, songs) {
+    // Checks if the playlist with the passed id exists
+    const playlist = this.playlists.find(
+      (playlist) => playlist.id === playlistId
+    );
+    if (!playlist) {
+      alert("A lista de reprodução selecionada não pôde ser encontrada!");
+    }
 
-  //   // Get next available id for the playlist
-  //   const id = playlist.songs.retrieveNextSongId();
+    // Updates playlist attributes
+    playlist.songs = songs;
 
-  //   // Create playlist and add to array
-  //   const song = new Song(id, name, artists);
-  //   playlist.songs.push(song);
+    // Updates the DOM of the playlist details if the playlist is the selected one
+    if (window.dragAndDrop.SelectedPlaylistId === playlistId) {
+      window.viewManager.showPlaylistDetails(playlist);
+    }
 
-  //   // Updates the DOM of the playlists
-  //   this.viewsManager.updatePlaylistsView(this.playlists);
-
-  //   // Update local storage
-  //   localStorage.setItem("playlists", JSON.stringify(this.playlists));
-  // }
+    // Update local storage
+    localStorage.setItem("playlists", JSON.stringify(this.playlists));
+  }
 }

@@ -17,8 +17,8 @@ class ViewManager {
   async fetchTemplates() {
     const promises = [];
 
-    promises.push(this.fetchTemplate("./templates/playlist-card.mustache"));
-    promises.push(this.fetchTemplate("./templates/song-item.mustache"));
+    promises.push(this.fetchTemplate("./templates/playlist-cards.mustache"));
+    promises.push(this.fetchTemplate("./templates/song-items.mustache"));
 
     const templates = await Promise.all(promises);
 
@@ -44,6 +44,17 @@ class ViewManager {
   }
 
   /**
+   * Parse the HTML string into a document
+   * @param {string} html The HTML string
+   * @returns the document DOM
+   */
+  parseHTML(html) {
+    const template = document.createElement("template");
+    template.innerHTML = html;
+    return template.content;
+  }
+
+  /**
    * Renders the specified template with the specified data
    * @param {string} template The template name
    * @param {object} data Data object to render the specified template
@@ -53,13 +64,10 @@ class ViewManager {
     // Render the template
     const html = Mustache.render(this.templates[template], data);
 
-    // Initialize the DOM parser
-    var parser = new DOMParser();
-
     // Parse the text
-    var document = parser.parseFromString(html, "text/html");
+    var document = this.parseHTML(html);
 
-    return document.body.childNodes[0];
+    return document;
   }
 
   /**
@@ -98,17 +106,24 @@ class ViewManager {
       playlistsContainer.removeChild(playlistsContainer.lastChild);
     }
 
+    // Template data
+    const data = {
+      playlists: [],
+    };
+
     // Add the playlists cards to the container
     playlists.forEach((playlist) => {
-      const data = {
+      const newPlaylist = {
         id: playlist.id,
         vinylColor: this.randomColor(),
         title: playlist.title,
       };
-      const playlistCard = this.renderTemplate("playlistCard", data);
-
-      playlistsContainer.appendChild(playlistCard);
+      data.playlists.push(newPlaylist);
     });
+
+    // Render template
+    const playlistCards = this.renderTemplate("playlistCard", data);
+    playlistsContainer.appendChild(playlistCards);
 
     // Update playlists events
     window.dragAndDrop.updatePlaylistsEvents();
@@ -177,16 +192,23 @@ class ViewManager {
       songsListElement.removeChild(songsListElement.lastChild);
     }
 
+    // Template data
+    const data = {
+      songs: [],
+    };
+
     // Set playlist songs
     songs.forEach((song) => {
-      const data = {
+      const newSong = {
         name: song.name,
         artists: song.artists,
       };
-      const songItem = this.renderTemplate("songItem", data);
-
-      songsListElement.appendChild(songItem);
+      data.songs.push(newSong);
     });
+
+    // Render template
+    const songItems = this.renderTemplate("songItem", data);
+    songsListElement.appendChild(songItems);
 
     // Display or hide songs list
     if (songs.length > 0) {

@@ -21,6 +21,9 @@ class WebMessaging {
     editPlaylistButton.addEventListener("click", () =>
       this.editPlaylistButton()
     );
+
+    const editSongsButton = document.getElementById("edit-songs-button");
+    editSongsButton.addEventListener("click", () => this.editSongsButton());
   }
 
   onMessage(event) {
@@ -34,6 +37,9 @@ class WebMessaging {
         break;
       case "editPlaylist":
         window.storage.updatePlaylist(data.id, data.title, data.description);
+        break;
+      case "editSongs":
+        window.storage.updatePlaylistSongs(data.playlistId, data.songs);
         break;
     }
   }
@@ -72,6 +78,25 @@ class WebMessaging {
       const data = {
         event: "editPlaylist",
         playlist: playlist,
+      };
+      this.broadcast(data);
+    });
+  }
+
+  editSongsButton() {
+    const newWindow = this.newWindow(
+      "./songs-form.html",
+      screen.availWidth,
+      screen.availHeight
+    );
+
+    newWindow.addEventListener("load", () => {
+      const playlistId = window.dragAndDrop.SelectedPlaylistId;
+      const songs = window.storage.getPlaylist(playlistId).songs;
+      const data = {
+        event: "editSongs",
+        playlistId: playlistId,
+        songs: songs,
       };
       this.broadcast(data);
     });

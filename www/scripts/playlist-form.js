@@ -15,8 +15,6 @@ window.onload = function () {
 };
 
 function onMessage(event) {
-  console.dir(event);
-
   if (event.origin !== window.location.origin) return;
 
   const data = event.data;
@@ -32,6 +30,9 @@ function editPlaylist(playlist) {
   document.getElementById("id").value = playlist.id;
   document.getElementById("title").value = playlist.title;
   document.getElementById("description").value = playlist.description;
+
+  document.getElementById("header-title").innerHTML = "Editar Playlist";
+  document.getElementById("submit-button").innerHTML = "Editar";
 }
 
 function closeWindow(event) {
@@ -54,16 +55,20 @@ function submitData(event) {
   const title = document.getElementById("title").value;
   const description = document.getElementById("description").value;
 
-  console.log(id);
-  console.log(id.length === 0);
+  const newPlaylist = id.length === 0;
 
   const data = {
-    event: "newPlaylist",
     title: title,
     description: description,
   };
+  if (newPlaylist) {
+    data.event = "newPlaylist";
+  } else {
+    data.event = "editPlaylist";
+    data.id = parseInt(id);
+  }
 
   window.opener.postMessage(data, window.location.origin);
 
-  // window.close();
+  window.close();
 }

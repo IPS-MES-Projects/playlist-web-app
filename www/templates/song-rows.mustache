@@ -1,0 +1,11 @@
+{{ #songs }}
+<tr>
+  <td scope="row">{{ name }}</td>
+  <td>{{ artists }}</td>
+  <td>
+    <button onclick="removeSong({{ index }})" type="button" class="btn btn-danger">
+      <i class="far fa-trash-alt"></i>
+    </button>
+  </td>
+</tr>
+{{ /songs }}

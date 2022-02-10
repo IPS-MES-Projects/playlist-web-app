@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playlist App</title>
+
+    <!-- Style sheets -->
+    <link
+      href="vendors/fontawesome-free-5.15.4-web/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="vendors/bootstrap-5.1.3-dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="styles/main.css" rel="stylesheet" />
+    <!-- !Style sheets -->
+  </head>
+  <body>
+    <!-- Page content -->
+    <main class="container py-5">
+      <div class="d-grid gap-3">
+        <button
+          id="save-button"
+          type="button"
+          class="btn btn-success"
+          aria-label="Guardar as alterações realizadas às músicas da playlist"
+        >
+          Guardar Alterações
+        </button>
+
+        <button
+          id="cancel-button"
+          type="button"
+          class="btn btn-secondary"
+          aria-label="Cancelar as alterações realizadas às músicas da playlist"
+        >
+          Cancelar Alterações
+        </button>
+      </div>
+
+      <div class="card mt-5">
+        <p class="card-header h5">Adicionar Música à Playlist</p>
+        <div class="card-body">
+          <form id="add-song-form">
+            <div class="mb-3">
+              <label for="name" class="form-label">Nome</label>
+              <input
+                id="name"
+                type="text"
+                class="form-control"
+                placeholder="O nome da música a adicionar"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="artists" class="form-label">Artistas</label>
+              <input
+                id="artists"
+                type="text"
+                class="form-control"
+                placeholder="Os artistas da música a adicionar"
+                required
+              />
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button
+                type="reset"
+                class="btn btn-secondary me-md-2"
+                aria-label="Limpar o formulário de adição de música"
+              >
+                Limpar
+              </button>
+
+              <button
+                id="add-song-button"
+                type="submit"
+                class="btn btn-success"
+                aria-label="Adicionar a música à playlist"
+              >
+                Adicionar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card mt-5">
+        <p class="card-header h5">Músicas da Playlist</p>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Artistas</th>
+                <th scope="col">Apagar</th>
+              </tr>
+            </thead>
+            <tbody id="songs-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    <!-- !Page content -->
+
+    <!-- Vendor Scripts -->
+    <script src="vendors/fontawesome-free-5.15.4-web/js/all.min.js"></script>
+    <script src="vendors/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="vendors/mustache-4.1.0/mustache.min.js"></script>
+    <!-- !Vendor Scripts -->
+
+    <!-- Local Scripts -->
+    <script src="scripts/entities/song.js"></script>
+    <script src="scripts/songs-form.js"></script>
+    <!-- !Local Scripts -->
+  </body>
+</html>
